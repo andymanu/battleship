@@ -2,7 +2,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
+//using System.Data;
 using System.Diagnostics;
 /// <summary>
 /// The SeaGrid is the grid upon which the ships are deployed.
@@ -25,7 +25,7 @@ public class SeaGrid : ISeaGrid
     /// <summary>
     /// The sea grid has changed and should be redrawn.
     /// </summary>
-    public event EventHandler ISeaGrid.Changed;
+    public event EventHandler Changed;
 
     /// <summary>
     /// The width of the sea grid.
