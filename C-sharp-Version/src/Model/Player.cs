@@ -13,7 +13,7 @@ public class Player : IEnumerable<Ship>
 
 	protected static Random _Random = new Random();
 	private Dictionary<ShipName, Ship> _Ships = new Dictionary<ShipName, Ship>();
-	private SeaGrid _playerGrid = new SeaGrid(_Ships);
+	private SeaGrid _playerGrid; //= new SeaGrid(_Ships);
 	private ISeaGrid _enemyGrid;
 
 	protected BattleShipsGame _game;
@@ -42,6 +42,7 @@ public class Player : IEnumerable<Ship>
 	public Player(BattleShipsGame controller)
 	{
 		_game = controller;
+		_playerGrid = new SeaGrid(_Ships);
 
 		//for each ship add the ships name so the seagrid knows about them
 		foreach (ShipName name in Enum.GetValues(typeof(ShipName))) {
@@ -87,13 +88,13 @@ public class Player : IEnumerable<Ship>
 	/// <value>The ship</value>
 	/// <returns>The ship with the indicated name</returns>
 	/// <remarks>The none ship returns nothing/null</remarks>
-	public Ship Ship {
-		get {
+	public Ship Ship(ShipName name) {
+		//get {
 			if (name == ShipName.None)
 				return null;
 
-			return _Ships.Item(name);
-		}
+			return _Ships[name];
+		//}
 	}
 
 	/// <summary>
