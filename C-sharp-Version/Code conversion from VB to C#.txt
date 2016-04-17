@@ -1,0 +1,367 @@
+Code conversion from VB to C#
+------------------------------
+
+UtilityFunction.cs
+
+	Comment out - 	using System.Data
+	Add - 			using SwinGameSDK;
+
+	Replace Line 139
+				switch (grid.Item(row, col)) 
+			with 
+				switch (grid[row, col])
+
+	Comment out Lines 140-142 
+			//case TileView.Ship:
+			//draw = false;
+			//break;
+
+	Replace Line 202 	
+				SwinGame.DrawBitmap(GameImage(shipName), colLeft, rowTop);
+			with
+				SwinGame.DrawBitmap(GameResources.GameImage(shipName), colLeft, rowTop);
+
+	Replace all occurences of GameImage with GameResources.GameImage - 5 instances
+	Replace all occurences of GameFont with GameResources.GameFont - 2 instances
+
+	Replace s.animationHasEnded with s.AnimationHasEnded
+
+	Replace DrawScreen() with GameController.DrawScreen()
+
+	Replace CurrentState with GameController.CurrentState
+
+-------------------------------------------------------------------------MenuController.cs
+
+Comment out Line 6 - using System.Data;
+
+Lines 44, 45, 70, 72 - use of different colours (double check)
+
+Line 114 - Replace KeyCode.VK_ESCAPE with KeyCode.vk_ESCAPE
+
+Replace all occurences of EndCurrentState() with GameController.EndCurrentState() - 7 instances
+
+Line 201 - Replace 
+			for (i = 0; i <= _menuStructure(menu).Length - 1; i++) {
+		with 
+				for (i = 0; i <= _menuStructure[menu].Length - 1; i++) {
+
+Line 205 - Replace 
+			SwinGame.DrawTextLines(_menuStructure(menu)(i), MENU_COLOR, Color.Black, GameFont("Menu"), FontAlignment.AlignCenter, btnLeft + TEXT_OFFSET, btnTop + TEXT_OFFSET, BUTTON_WIDTH, 	BUTTON_HEIGHT);
+			with
+
+Line 121 - Replace
+				for (i = 0; i <= _menuStructure(menu).Length - 1; i++) {
+			with 
+				for (i = 0; i <= _menuStructure(menu).Length - 1; i++) {
+
+Line 235 - Replace 
+				return IsMouseInRectangle(btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT);
+			with 
+				return UtilityFunctions.IsMouseInRectangle(btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT);
+
+Append GameController. to StartGame(), AddNewState() and SetDifficulty 
+
+-------------------------------------------------------------------------HighScoreController.cs
+
+Comment out line 6 - using System.Data
+Lines 19, 21 - some changes to the values assigned to variables
+
+Line 137 - Replace
+			s = _Scores.Item(i);
+			with 
+			s = _Scores[i];
+
+Replace all instances of GameFont with GameResources.GameFont - 6 instances
+
+Line 157 - replace VK_ESCAPE with vk_ESCAPE, and VK_RETURN with vk_RETURN
+
+Append GameController. to all occurences of EndCurrentState(), AddNewState()
+Append UtilityFunctions. to DrawBackground()
+
+
+Line 177 - Replace
+				if (value > _Scores.Item(_Scores.Count - 1).Value) {
+			with 
+				if (value > _Scores[_Scores.Count - 1].Value) {
+
+-------------------------------------------------------------------------GameState.cs
+
+Comment out Line 6 - using System.Data
+-------------------------------------------------------------------------GameResources.cs
+
+Comment out Line 6 - using System.Data
+
+Line 75 - Replace return _Fonts(font); with return return _Fonts[font];
+
+Line 86 - Replace return _Images(image); with return _Images[image];
+
+Line 97 - Replace return _Sounds(sound); with return _Sounds[sound];
+
+Line 108 - Replace return _Music(music); with return _Music[music];
+
+Delete line 273 - Font obj = default(Font);
+Edit line 274 - foreach ( obj in _Fonts.Values) {
+		Change to foreach (Font obj in _Fonts.Values) {
+
+Do similarly for the methods FreeImages(), FreeSounds() and FreeMusic()
+
+-------------------------------------------------------------------------GameLogic.cs
+
+Comment out line 6 - using System.Data
+Add - using SwinGameSDK;
+Append GameResources to LoadResources(), GameMusic(...)and FreeResources()
+Append GameController. to HandleUserInput(), DrawScreen() and CurrentState
+
+-------------------------------------------------------------------------GameController.cs
+
+Comment out using System.Data
+
+Replace public GameController() with static GameController() - Line 54
+
+Append UtilityFunctions. to AddExplosion(..), DrawAnimationSequence(), AddSplash(..), Message, UpdateAnimations(), DrawBackground() and DrawAnimations()
+
+Append GameResources. to all occurrences of GameSound(..) - 8 instances
+
+Append MenuController. to HandleMainMenuInput(), HandleGameMenuInput(), HandleSetupMenuInput(), DrawMainMenu(), DrawGameMenu(), DrawSettings()
+
+Append DeploymentController. to HandleDeploymentInput() and DrawDeployment()
+
+Append DiscoveryController. to HandleDiscoveryInput() and DrawDiscovery()
+
+Append EndingGameController. to HandleEndOfGameInput() and DrawEndOfGame()
+
+Append HighScoreController. to HandleHighScoreInput() and DrawHighScores()
+
+-------------------------------------------------------------------------EndingGameController.cs
+
+Comment out using System.Data
+
+Append UtilityFunctions. to DrawField(...) and DrawSmallField(..)
+Append GameController. to ComputerPlayer.PlayerGrid, ComputerPlayer, HumanPlayer.PlayerGrid, HumanPlayer, HumanPlayer.IsDestroyed, HumanPlayer.Score and EndCurrentState()
+
+Append GameResources. to GameFont (2 occurrences)
+
+Replace KeyCode.VK_RETURN with KeyCode.vk_RETURN and KeyCode.VK_ESCAPE with KeyCode.vk_ESCAPE
+
+Append HighScoreController. to ReadHighScore
+
+-------------------------------------------------------------------------DiscoveryGameController.cs
+
+Comment out using System.Data
+
+Append GameController. to AddNewState
+Replace KeyCode.VK_ESCAPE with KeyCode.vk_ESCAPE
+
+Append UtilityFunctions. to FIELD_TOP, CELL_HEIGHT, CELL_GAP, FIELD_LEFT, CELL_WIDTH
+
+Append GameController. to HumanPlayer and ComputerPlayer
+Append GameController. to Attack(row, col)
+Append UtilityFunctions. to DrawField, DrawSmallField and DrawMessage
+Append GameResources. to GameFont
+
+Replace KeyCode.VK_LSHIFT with KeyCode.vk_LSHIFT, KeyCode.VK_RSHIFT with KeyCode.vk_RSHIFT and KeyCode.VK_C with KeyCode.vk_c
+
+-------------------------------------------------------------------------DeploymentController.cs
+
+Comment out using System.Data
+Correct all KeyCode settings.
+
+Add GameController. to AddNewState(..), HumanPlayer., EndDeployment(), 
+Add UtilityFunctions. to IsMouseInRectangle(..), Message, DrawField(...), DrawMessage(), FIELD_TOP, CELL_HEIGHT, CELL_GAP, FIELD_LEFT, CELL_WIDTH
+
+Lines 178, 144 - Replace i = Conversion.Int(sn) - 1; with i =((int)sn) - 1;
+
+Append GameResources to GameImage - 5 instances
+Append GameResources to GameSound - 
+
+-------------------------------------------------------------------------AIHardPlayer.cs 
+
+Comment out using System.Data;
+
+Line 125 and 351 - Replace EnemyGrid.Item(row, column) with EnemyGrid[row, column]
+Line 194 - Replace Location source = default(Location); with Location source = null
+
+-------------------------------------------------------------------------AIMediumPlayer.cs
+
+Comment out using System.Data;
+
+Line 55 and 116 - Replace EnemyGrid.Item(row, column) with EnemyGrid[row, column]
+-------------------------------------------------------------------------AIOption.cs
+
+Comment out using System.Data;
+-------------------------------------------------------------------------AIPlayer.cs
+
+Comment out using System.Data;
+Add using SwinGameSDK;
+
+Replace SwinGame.WindowCloseRequested with SwinGame.WindowCloseRequested()
+
+Line 66, Replace 
+			return @this != null && other != null && @this.Row == other.Row && @this.Column == other.Column;
+		with 
+			return !ReferenceEquals(@this, null) && !ReferenceEquals(other, null) && @this.Row == other.Row && @this.Column == other.Column;
+
+Line 77, Replace 
+			return @this == null || other == null || @this.Row != other.Row || @this.Column != other.Column;
+		with 
+			return ReferenceEquals(@this, null) || ReferenceEquals(other, null) || @this.Row != other.Row || @this.Column != other.Column;
+
+-------------------------------------------------------------------------AttackResult.cs
+
+Comment out using System.Data;
+-------------------------------------------------------------------------BattleShipsGame.cs
+
+Comment out using System.Data;
+
+Line 43, replace get { return _players(_playerIndex); } with get { return _players[_playerIndex]; }
+
+Replace lines 53-56
+	if (_players(0) == null) {
+			_players(0) = p;
+		} else if (_players(1) == null) {
+			_players(1) = p;
+
+with 
+	if (_players[0] == null) {
+			_players[0] = p;
+		} else if (_players[1] == null) {
+			_players[1] = p;
+
+
+Replace line 69
+			_players(0).Enemy = new SeaGridAdapter(_players(1).PlayerGrid);
+		with 
+			_players[0].Enemy = new SeaGridAdapter(_players[1].PlayerGrid);
+
+Replace line 70
+			_players(1).Enemy = new SeaGridAdapter(_players(0).PlayerGrid);
+		with 
+			_players[1].Enemy = new SeaGridAdapter(_players[0].PlayerGrid);
+
+Replace line 88
+			if (_players(otherPlayer).IsDestroyed) {
+		with
+			if (_players[otherPlayer].IsDestroyed) {
+
+-------------------------------------------------------------------------Direction.cs
+
+Comment out using System.Data;
+-------------------------------------------------------------------------ISeaGrid.cs
+
+Comment out using System.Data;
+
+Line 32, Replace TileView Item { get; } with TileView this[int row, int col] { get; }
+-------------------------------------------------------------------------Player.cs
+
+Comment out using System.Data;
+
+Line 17 - Replace private SeaGrid _playerGrid = new SeaGrid(_Ships); 
+			with private SeaGrid _playerGrid;
+
+Add line _playerGrid = new SeaGrid(_Ships); after line 45
+
+Update method Ship (line 92)
+
+Replace 
+		public Ship Ship {
+		get {
+			if (name == ShipName.None)
+				return null;
+
+			return _Ships.Item(name);
+		}
+	}
+
+with 
+	public Ship Ship(ShipName name) {
+
+		if (name == ShipName.None)
+			return null;
+
+		return _Ships[name];
+
+	}
+
+Additional code added at lines 192 and 197 (double check)
+-------------------------------------------------------------------------ResultOfAttack.cs
+
+Comment out using System.Data;
+
+-------------------------------------------------------------------------SeaGrid.cs
+
+Comment out using System.Data;
+Line 22 - Replace private Tile[,] _GameTiles = new Tile[Width, Height]; with private Tile[,] _GameTiles;
+Line 29 - Replace public event EventHandler ISeaGrid.Changed; with public event EventHandler Changed;
+
+Lines 62-64, Replace
+		public TileView Item {
+
+		get { return _GameTiles(x, y).View; }
+	}
+
+	with 
+	public TileView this[int x, int y]
+	{
+		get { return _GameTiles[x, y].View; }
+	}
+
+Add line _GameTiles = new Tile[Width, Height]; at start of method public SeaGrid(...) Line 85
+
+Line 92 - Replace _GameTiles(i, j) = new Tile(i, j, null); with 
+
+Line 108 - Replace Ship newShip = _Ships(ship); with Ship newShip = _Ships[ship];
+
+Line 129 - Replace if (direction == direction.LeftRight) { with if (direction == Direction.LeftRight) {
+
+Line 144 - Replace _GameTiles(currentRow, currentCol).Ship = newShip; with _GameTiles[currentRow, currentCol].Ship = newShip;
+
+Replace _GameTiles(row, col) with _GameTiles[row, col] - 6 occurrences from line 174 onwards
+
+-------------------------------------------------------------------------SeaGridAdapter.cs
+
+Comment out using System.Data;
+
+Replace lines 47-75 	public TileView Item {
+		get {
+			TileView result = _MyGrid.Item(x, y);
+
+			if (result == TileView.Ship) {
+				return TileView.Sea;
+			} else {
+				return result;
+			}
+		}
+	}
+
+	with 
+
+	public TileView this[int x, int y] {
+		get {
+			TileView result = _MyGrid[x, y];
+
+			if (result == TileView.Ship) {
+				return TileView.Sea;
+			} else {
+				return result;
+			}
+		}
+	}
+
+Line 62 public event EventHandler ISeaGrid.Changed; with public event EventHandler Changed;
+
+-------------------------------------------------------------------------
+Ship.cs
+
+Comment out using System.Data;
+Line 83, replace _sizeOfShip = _shipName; with _sizeOfShip = (int) _shipName;
+-------------------------------------------------------------------------
+ShipName.cs
+
+Comment out using System.Data;
+-------------------------------------------------------------------------
+Tile.cs
+
+Comment out using System.Data;
+-------------------------------------------------------------------------Tileview.cs
+
+Comment out using System.Data;
