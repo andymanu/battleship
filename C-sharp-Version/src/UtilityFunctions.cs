@@ -5,7 +5,6 @@ using System.Collections.Generic;
 //using System.Data;
 using System.Diagnostics;
 using SwinGameSDK;
-
 /// <summary>
 /// This includes a number of utility methods for
 /// drawing and interacting with the Mouse.
@@ -152,17 +151,12 @@ static class UtilityFunctions
 							fillColor = LARGE_HIT;
 						break;
 					case TileView.Sea:
+					case TileView.Ship:
 						if (small)
 							fillColor = SMALL_SEA;
 						else
 							draw = false;
 						break;
-					//case TileView.Ship:
-					//	if (small)
-					//		fillColor = SMALL_SEA;
-					//	else
-					//		draw = false;
-					//	break;
 				}
 
 				if (draw) {
@@ -259,7 +253,7 @@ static class UtilityFunctions
 
 	public static void AddExplosion(int row, int col)
 	{
-		AddAnimation(row, col, "Explosion");
+		AddAnimation(row, col, "Splash");
 	}
 
 	public static void AddSplash(int row, int col)
