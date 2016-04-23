@@ -18,6 +18,7 @@ static class HighScoreController
 	private const int NAME_WIDTH = 3;
 
 	private const int SCORES_LEFT = 490;
+
 	/// <summary>
 	/// The score structure is used to keep the name and
 	/// score of the top players together.
@@ -44,8 +45,11 @@ static class HighScoreController
 		}
 	}
 
-
+	/// <summary>
+	/// The list of player scores.
+	/// </summary>
 	private static List<Score> _Scores = new List<Score>();
+
 	/// <summary>
 	/// Loads the scores from the highscores text file.
 	/// </summary>
@@ -198,8 +202,9 @@ static class HighScoreController
 			_Scores.RemoveAt(_Scores.Count - 1);
 			_Scores.Add(s);
 			_Scores.Sort();
+			SaveScores ();
 
 			GameController.EndCurrentState();
-		}
+		}	
 	}
 }
