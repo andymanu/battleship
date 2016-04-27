@@ -13,7 +13,7 @@ using SwinGameSDK;
 /// <remarks>
 /// Data is saved to a file.
 /// </remarks>
-static class HighScoreController
+public class HighScoreController
 {
 	private const int NAME_WIDTH = 3;
 
