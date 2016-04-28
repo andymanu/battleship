@@ -24,12 +24,14 @@ static class EndingGameController
 		if (GameController.HumanPlayer.IsDestroyed) 
 		{
 			SwinGame.DrawTextLines("YOU LOSE!", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 250, SwinGame.ScreenWidth(), SwinGame.ScreenHeight());
- 			SwinGame.DrawTextLines("Press Space Bar To Quit", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 350, SwinGame.ScreenWidth(),SwinGame.ScreenHeight());
+ 			SwinGame.DrawTextLines("Press Space Bar", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 350, SwinGame.ScreenWidth(),SwinGame.ScreenHeight());
+ 			SwinGame.DrawTextLines("to return Home", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 450, SwinGame.ScreenWidth(),SwinGame.ScreenHeight());
  		} 
  		else 
  		{
   			SwinGame.DrawTextLines("-- WINNER --", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 250, SwinGame.ScreenWidth(), SwinGame.ScreenHeight());
- 			SwinGame.DrawTextLines("Press Space Bar To Quit", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 350, SwinGame.ScreenWidth(),SwinGame.ScreenHeight());
+ 			SwinGame.DrawTextLines("Press Space Bar", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 350, SwinGame.ScreenWidth(),SwinGame.ScreenHeight());
+ 			SwinGame.DrawTextLines("to return Home", Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, 0, 450, SwinGame.ScreenWidth(),SwinGame.ScreenHeight());
   		}
 	}
 
