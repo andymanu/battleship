@@ -168,7 +168,7 @@ static class MenuController
 		//SwinGame.DrawText("Settings", Color.White, GameFont("ArialLarge"), 50, 50)
 
 		DrawButtons(MAIN_MENU);
-		DrawButtons(SETUP_MENU, 1, 1,(AISettingq));
+		DrawButtons(SETUP_MENU, 1, 1);
 	}
 
 	/// <summary>
